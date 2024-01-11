@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  Dev:
+  test:
     runs-on: ubuntu-latest
     container:
       image: node:latest
@@ -20,25 +20,27 @@ jobs:
           cat /etc/os-release
       - name: Log env
         run: /bin/echo --version
-  QA:
+  build:
+    needs: test
     runs-on: ubuntu-latest
     container:
       image: node:latest
     steps:
-      - name: Log Node & OS Versions
+      - name: Build
         run: |
           node -v
           cat /etc/os-release
-      - name: Log env
+      - name: Build Finished
         run: /bin/echo --version
-  PROD:
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     container:
       image: node:latest
     steps:
-      - name: Log Node & OS Versions
+      - name: Deploy
         run: |
           node -v
           cat /etc/os-release
-      - name: Log env
+      - name: Deployed
         run: /bin/echo --version

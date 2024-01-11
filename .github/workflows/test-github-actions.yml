@@ -1,4 +1,4 @@
-name: Docker
+name: GitHub Action Demo
 on:
   push:
     branches:
@@ -9,19 +9,32 @@ on:
       - main
 
 jobs:
-  docker-job:
+  Dev:
     runs-on: ubuntu-latest
     container:
       image: node:latest
-      # credentials:
-      #   username:
-      #   password:
-      # env:
-      #   API_URL: some-url.com
-      # ports:
-      #   - 80
-      # options: --cpus 1
-
+    steps:
+      - name: Log Node & OS Versions
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Log env
+        run: /bin/echo --version
+  QA:
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
+    steps:
+      - name: Log Node & OS Versions
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Log env
+        run: /bin/echo --version
+  PROD:
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
     steps:
       - name: Log Node & OS Versions
         run: |

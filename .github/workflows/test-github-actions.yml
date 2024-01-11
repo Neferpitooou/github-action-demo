@@ -1,0 +1,31 @@
+name: Docker
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
+      # credentials:
+      #   username:
+      #   password:
+      # env:
+      #   API_URL: some-url.com
+      # ports:
+      #   - 80
+      # options: --cpus 1
+
+    steps:
+      - name: Log Node & OS Versions
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Log env
+        run: /bin/echo --version
